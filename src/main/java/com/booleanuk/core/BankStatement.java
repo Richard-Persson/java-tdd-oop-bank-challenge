@@ -14,11 +14,15 @@ public class BankStatement {
 
     public void printStatement(){
 
+        for (Transaction t : transactions){
+            System.out.print(t.getDate() + "  " + t.getAmount() + " "  + t.getBalance());
+            System.out.println("\n");
+        }
     }
 
 
     public boolean add(Transaction t){
-        return false;
+        return transactions.add(t);
     }
 
     public List<Transaction> getTransactions() {

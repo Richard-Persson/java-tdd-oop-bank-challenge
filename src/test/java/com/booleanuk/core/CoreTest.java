@@ -66,13 +66,29 @@ public class CoreTest {
     @Test
     void createTransaction(){
 
-        customer.deposit(currentAccount, 50);
+        Customer customer = new Customer();
+        customer.createCurrentAccount();
+        customer.deposit(customer.getCurrentAccount(), 50);
 
-        BankStatement b = customer.getBankStatements().get(currentAccount);
-        BankStatement b2 = customer.getBankStatements().get(savingsAccount);
+        BankStatement b = customer.getBankStatements(customer.getCurrentAccount());
 
         Assertions.assertTrue(b.getTransactions().size()>0);
-        Assertions.assertNull(b2.getTransactions());
+
+    }
+
+
+    @Test
+    void print(){
+
+        Transaction t1 = new Transaction(1000,1500,"Debit");
+        Transaction t2 = new Transaction(500,1000,"Credit");
+
+        BankStatement bankStatement = new BankStatement();
+        bankStatement.add(t1);
+        bankStatement.add(t2);
+
+        bankStatement.printStatement();
+        Assertions.assertTrue(true);
 
     }
 

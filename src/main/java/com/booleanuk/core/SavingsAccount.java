@@ -11,19 +11,24 @@ public class SavingsAccount implements Account{
     }
 
 
-
     @Override
     public boolean deposit(double amount) {
-        return false;
+        if(amount < 0 ) return false;
+        this.balance+=amount;
+        return true;
     }
 
     @Override
     public boolean withdraw(double amount) {
-        return false;
+        if(amount < 0 ) return false;
+        this.balance-=amount;
+
+        return true;
     }
 
     @Override
     public double getBalance() {
-        return 0;
+        return this.balance;
     }
+
 }

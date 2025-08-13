@@ -8,10 +8,12 @@ public class Transaction {
     private LocalDate date = LocalDate.now();
     private double amount;
     private double balance;
+    private String type;
 
-    public Transaction(double amount, double balance) {
+    public Transaction(double amount, double balance, String type) {
         this.amount = amount;
         this.balance = balance;
+        this.type = type.toUpperCase();
     }
 
     public double getBalance() {
