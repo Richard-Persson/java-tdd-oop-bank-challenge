@@ -56,4 +56,21 @@ public class Customer {
         return ac.getBankstatement();
     }
 
+    public boolean changeAccountBranch(Account ac, Enum<Branches> branch){
+        if(ac==null)
+            return false;
+
+        ac.setBranch(branch);
+        return true;
+    }
+
+
+    public boolean requestOverdraft(double amount){
+
+        return !currentAccount.requestOverdraft(amount);
+
+    }
+
+
+
 }

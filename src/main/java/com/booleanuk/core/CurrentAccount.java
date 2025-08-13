@@ -7,6 +7,7 @@ public class CurrentAccount implements Account{
     private double balance;
     private Enum<Branches> branch;
     private final BankStatement bankStatement = new BankStatement();
+    private final double OVERDRAFTLIMIT = -3000;
 
     public CurrentAccount(){
         balance = calculateBalance();
@@ -64,5 +65,9 @@ public class CurrentAccount implements Account{
 
         return sum;
 
+    }
+
+    public boolean requestOverdraft(double amount){
+        return this.balance-amount < OVERDRAFTLIMIT;
     }
 }

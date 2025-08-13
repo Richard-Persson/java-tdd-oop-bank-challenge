@@ -16,8 +16,10 @@
 |               |                                            | bank statement dosen't exist                          | null                                |
 | BankStatement | List\<transactions\>getTransactoins()      | if there exists transactions                          | List of all transactions            |
 |               |                                            | no transactions exists                                | null                                |
+| Account       | boolean requestOverdarft(double amount)    | amount does not go past limit                         | true                                |
+|               |                                            | amount exceeds limit                                  | false                               |
 |               |                                            |                                                       |                                     |
 |               |                                            |                                                       |                                     |
 |               |                                            |                                                       |                                     |
 |               |                                            |                                                       |                                     |
-|               |                                            |                                                       |                                     |
+

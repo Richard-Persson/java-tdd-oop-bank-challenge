@@ -55,6 +55,11 @@ public class SavingsAccount implements Account{
         this.branch = newBranch;
     }
 
+    @Override
+    public boolean requestOverdraft(double amount) {
+        return false;
+    }
+
     private double calculateBalance(){
 
         if(bankStatement.getTransactions().isEmpty())

@@ -94,11 +94,11 @@ public class BankTest {
         Transaction depositTransaction2 = tList.get(1);
         Transaction withdrawTransaction = tList.get(2);
 
-        Assertions.assertEquals(1000,depositTransaction1.getBalance());
-        Assertions.assertEquals(1000,depositTransaction1.getAmount());
-        Assertions.assertEquals(2000,depositTransaction2.getAmount());
-        Assertions.assertEquals(3000,depositTransaction2.getBalance());
-        Assertions.assertEquals(2500,withdrawTransaction.getBalance());
+        Assertions.assertEquals(1_000,depositTransaction1.getBalance());
+        Assertions.assertEquals(1_000,depositTransaction1.getAmount());
+        Assertions.assertEquals(2_000,depositTransaction2.getAmount());
+        Assertions.assertEquals(3_000,depositTransaction2.getBalance());
+        Assertions.assertEquals(2_500,withdrawTransaction.getBalance());
         Assertions.assertEquals(500,withdrawTransaction.getAmount());
 
 
@@ -117,6 +117,18 @@ public class BankTest {
 
         bankStatement.printStatement();
         Assertions.assertTrue(true);
+
+    }
+
+    @Test
+    void overdraft(){
+
+        Customer c1 = new Customer();
+        c1.createCurrentAccount();
+        c1.deposit(c1.getCurrentAccount(),100);
+
+        Assertions.assertTrue(c1.requestOverdraft(400));
+        Assertions.assertFalse(c1.requestOverdraft(3200));
 
     }
 

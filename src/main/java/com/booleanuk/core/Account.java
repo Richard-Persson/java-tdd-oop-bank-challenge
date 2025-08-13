@@ -9,6 +9,7 @@ public interface Account {
     double getBalance();
     Enum<Branches> getBranch();
     void setBranch(Enum<Branches> newBranch);
+    boolean requestOverdraft(double amount);
 
 
 }
