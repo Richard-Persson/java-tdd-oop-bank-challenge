@@ -71,9 +71,7 @@ public class CoreTest {
         customer.deposit(customer.getCurrentAccount(), 50);
 
         BankStatement b = customer.getBankStatements(customer.getCurrentAccount());
-
         Assertions.assertTrue(b.getTransactions().size()>0);
-
     }
 
 

@@ -12,6 +12,11 @@ public class SavingsAccount implements Account{
 
 
     @Override
+    public BankStatement getBankstatement() {
+        return null;
+    }
+
+    @Override
     public boolean deposit(double amount) {
         if(amount < 0 ) return false;
         this.balance+=amount;
