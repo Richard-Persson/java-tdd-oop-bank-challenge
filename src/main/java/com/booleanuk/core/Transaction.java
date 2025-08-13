@@ -8,35 +8,34 @@ public class Transaction {
     private LocalDate date = LocalDate.now();
     private double amount;
     private double balance;
-    private String type;
+    private Enum<AccountOperation> type;
 
-    public Transaction(double amount, double balance, String type) {
+    public Transaction(double amount, double balance, Enum<AccountOperation>type) {
         this.amount = amount;
         this.balance = balance;
-        this.type = type.toUpperCase();
+        this.type = type;
     }
 
     public double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
 
     public double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
 
     public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+
+    public Enum<AccountOperation> getType() {
+        return type;
+    }
+
+    public void setType(Enum<AccountOperation> type) {
+        this.type = type;
     }
 }

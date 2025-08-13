@@ -52,7 +52,7 @@ public class Customer {
         return true;
     }
 
-    public BankStatement getBankStatements(Account ac) {
+    public BankStatement getBankStatement(Account ac) {
         return ac.getBankstatement();
     }
 

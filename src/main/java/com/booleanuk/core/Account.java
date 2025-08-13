@@ -7,6 +7,8 @@ public interface Account {
     boolean deposit(double amount);
     boolean withdraw(double amount);
     double getBalance();
+    Enum<Branches> getBranch();
+    void setBranch(Enum<Branches> newBranch);
 
 
 }

@@ -3,6 +3,7 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import static com.booleanuk.core.AccountOperation.*;
 
 public class BankStatement {
 
@@ -14,9 +15,15 @@ public class BankStatement {
 
     public void printStatement(){
 
+        String x = String.format("%-15s || %-15s || %-15s || %s" , "date", "credit", "debit", "balance" );
+        System.out.println(x);
+
         for (Transaction t : transactions){
-            System.out.print(t.getDate() + "  " + t.getAmount() + " "  + t.getBalance());
-            System.out.println("\n");
+            if(t.getType()==DEPOSIT)
+                System.out.printf("%-15s || %-15s || %-15s || %s%n", t.getDate(), 0 , t.getAmount(), t.getBalance() );
+            else
+                System.out.printf("%-15s || %-15s || %-15s || %s%n", t.getDate(), t.getAmount() ,0 , t.getBalance() );
+
         }
     }
 

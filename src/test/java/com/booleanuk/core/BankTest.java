@@ -1,19 +1,15 @@
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CoreTest {
+import java.util.List;
 
-    private Customer customer = new Customer();
+import static com.booleanuk.core.AccountOperation.*;
+
+public class BankTest {
+
     private Account currentAccount = new CurrentAccount();
-    private Account savingsAccount = new SavingsAccount();
-
-    @BeforeEach
-    void setup(){
-
-    }
 
     @Test
     void deposit(){
@@ -70,16 +66,50 @@ public class CoreTest {
         customer.createCurrentAccount();
         customer.deposit(customer.getCurrentAccount(), 50);
 
-        BankStatement b = customer.getBankStatements(customer.getCurrentAccount());
+        BankStatement b = customer.getBankStatement(customer.getCurrentAccount());
         Assertions.assertTrue(b.getTransactions().size()>0);
+    }
+
+    @Test
+    void getBalance(){
+
+        Account ac = new CurrentAccount();
+        ac.deposit(1000);
+        Assertions.assertEquals(1000,ac.getBalance());
+    }
+
+
+    @Test
+    void checkTransactions(){
+
+
+        Account account = new CurrentAccount();
+
+        account.deposit(1000);
+        account.deposit(2000);
+        account.withdraw(500);
+        BankStatement b = account.getBankstatement();
+        List<Transaction> tList = b.getTransactions();
+        Transaction depositTransaction1 = tList.get(0);
+        Transaction depositTransaction2 = tList.get(1);
+        Transaction withdrawTransaction = tList.get(2);
+
+        Assertions.assertEquals(1000,depositTransaction1.getBalance());
+        Assertions.assertEquals(1000,depositTransaction1.getAmount());
+        Assertions.assertEquals(2000,depositTransaction2.getAmount());
+        Assertions.assertEquals(3000,depositTransaction2.getBalance());
+        Assertions.assertEquals(2500,withdrawTransaction.getBalance());
+        Assertions.assertEquals(500,withdrawTransaction.getAmount());
+
+
     }
 
 
     @Test
     void print(){
 
-        Transaction t1 = new Transaction(1000,1500,"Debit");
-        Transaction t2 = new Transaction(500,1000,"Credit");
+        Transaction t1 = new Transaction(1000,1500,DEPOSIT);
+        Transaction t2 = new Transaction(500,1000,WITHDRAW);
 
         BankStatement bankStatement = new BankStatement();
         bankStatement.add(t1);

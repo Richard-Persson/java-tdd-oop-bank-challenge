@@ -1,12 +1,16 @@
 package com.booleanuk.core;
+import static com.booleanuk.core.AccountOperation.*;
+import static com.booleanuk.core.Branches.*;
 
 public class CurrentAccount implements Account{
 
     private double balance;
+    private Enum<Branches> branch;
     private final BankStatement bankStatement = new BankStatement();
 
     public CurrentAccount(){
         balance = calculateBalance();
+        this.branch = OSLO;
 
     }
 
@@ -18,7 +22,7 @@ public class CurrentAccount implements Account{
     @Override
     public boolean deposit(double amount) {
         if(amount < 0 ) return false;
-        Transaction t = new Transaction(amount,this.balance+amount, "Debit");
+        Transaction t = new Transaction(amount,this.balance+amount,DEPOSIT);
         this.bankStatement.add(t);
         this.balance+=amount;
         return true;
@@ -26,9 +30,8 @@ public class CurrentAccount implements Account{
 
     @Override
     public boolean withdraw(double amount) {
-        double negative = amount * -1;
         if(amount < 0 || this.balance-amount < 0 ) return false;
-        Transaction t = new Transaction(negative,this.balance + negative, "Credit");
+        Transaction t = new Transaction(amount,this.balance - amount, WITHDRAW);
         bankStatement.add(t);
         this.balance-=amount;
 
@@ -38,6 +41,16 @@ public class CurrentAccount implements Account{
     @Override
     public double getBalance() {
         return this.balance;
+    }
+
+    @Override
+    public Enum<Branches> getBranch() {
+        return this.branch;
+    }
+
+    @Override
+    public void setBranch(Enum<Branches> newBranch) {
+        this.branch = newBranch;
     }
 
     private double calculateBalance(){
